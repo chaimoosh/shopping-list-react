@@ -15,7 +15,7 @@ class ItemsEdit extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     const { updateItem, history } = this.props
-    updateItem(this.state);
+    updateItem(this.state, this.props.item.id);
     history.push('/items');
   }
 
@@ -28,30 +28,47 @@ class ItemsEdit extends Component {
   render() {
     return (
       <div>
-        <h2>Add an Item</h2>
+        <div>
+          <h3>Item</h3>
+          <p>{this.props.item.name}</p>
+          <p>{this.props.item.amount}</p>
+          <p>{this.props.item.notes}</p>
+        </div>
+        <h2>Update Item</h2>
         <form onSubmit={this.handleOnSubmit} ><br></br>
           <input
             type="text"
-            placeholder="Name"
+            placeholder={this.props.item.name}
             name="name"
             onChange={this.handleOnChange} /><br></br>
           <input
             type="text"
-            placeholder="Amount"
+            placeholder={this.props.item.amount}
             name="amount"
             onChange={this.handleOnChange} /><br></br>
             <input
               type="text"
-              placeholder="Notes"
+              placeholder={this.props.item.notes}
               name="notes"
               onChange={this.handleOnChange} /><br></br>
           <input
             type="submit"
-            value="Add Item" />
+            value="Update Item" />
         </form>
       </div>
     );
   }
 };
 
-export default connect(null, { updateItem })(ItemsEdit);
+const mapStateToProps = (state, ownProps) => {
+
+  const item = state.itemsReducer.items.find(item => item.id == ownProps.match.params.itemId)
+
+  if (item) {
+    return {item}
+  } else {
+    return { item: {}}
+  }
+};
+
+export default connect(mapStateToProps, { updateItem })(ItemsEdit);
