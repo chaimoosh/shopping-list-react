@@ -1,21 +1,51 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import ItemsList from './components/ItemsList'
+import ItemsNew from './components/ItemsNew'
+import ItemsShow from './components/ItemsShow'
+import ItemsEdit from './components/ItemsEdit'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { fetchItems } from './actions/itemActions'
+import Navbar from './components/Navbar'
+import * as actions from './actions/itemActions';
 class App extends Component {
+
+  componentDidMount() {
+    const { items, actions } = this.props
+      actions.fetchItems();
+  }
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+          <Router>
+          <div>
+            <Navbar />
+            <Switch>
+              <Route exact path="/" render={() => <h3>Welcome to the Shopping List App</h3>} />
+              <Route exact path={`/items/new`} component={ItemsNew} />
+              <Route exact path={`/items/:itemId/edit`} component={ItemsEdit}/>
+              <Route exact path={`/items/:itemId`} component={ItemsShow}/>
+              <Route exact path="/items" component={ItemsList} />
+            </Switch>
+          </div>
+        </Router>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    items: state.items
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return { actions: bindActionCreators(actions, dispatch) };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
