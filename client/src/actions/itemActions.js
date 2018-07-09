@@ -58,7 +58,10 @@ export const createItem = item => {
 export const deleteItem = id => {
   return dispatch => {
     return fetch(`http://localhost:3001/api/items/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
     })
       .then(response => {
         if (response.ok) {
@@ -73,7 +76,7 @@ export const deleteItem = id => {
 
 export const updateItem = (item, id) => {
   return dispatch => {
-    return fetch(`http://localhost:3001/api/items/crops/${id}`, {
+    return fetch(`http://localhost:3001/api/items/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
