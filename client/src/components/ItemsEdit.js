@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateItem } from '../actions/itemActions';
+import ItemCard from './ItemCard'
+import FormCard from './FormCard'
 
 class ItemsEdit extends Component {
   constructor(props) {
@@ -30,9 +32,7 @@ class ItemsEdit extends Component {
       <div>
         <div>
           <h3>Item</h3>
-          <p>{this.props.item.name}</p>
-          <p>{this.props.item.amount}</p>
-          <p>{this.props.item.notes}</p>
+          <ItemCard item={this.props.item} />
         </div>
         <h2>Update Item</h2>
         <form onSubmit={this.handleOnSubmit} ><br></br>

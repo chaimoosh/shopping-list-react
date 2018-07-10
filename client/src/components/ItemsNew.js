@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createItem } from '../actions/itemActions';
+import FormCard from './FormCard'
 
 class ItemsNew extends Component {
   constructor(props) {
@@ -29,26 +30,7 @@ class ItemsNew extends Component {
     return (
       <div>
         <h2>Add an Item</h2>
-        <form onSubmit={this.handleOnSubmit} >
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            onChange={this.handleOnChange} /> <br></br>
-          <input
-            type="text"
-            placeholder="Amount"
-            name="amount"
-            onChange={this.handleOnChange} /><br></br>
-            <input
-              type="text"
-              placeholder="Notes"
-              name="notes"
-              onChange={this.handleOnChange} /><br></br>
-          <input
-            type="submit"
-            value="Add Item" />
-        </form>
+        <FormCard handleOnSubmit={this.handleOnSubmit} handleOnChange={this.handleOnChange} />
       </div>
     );
   }

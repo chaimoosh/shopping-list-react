@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/itemActions';
 import { bindActionCreators } from 'redux';
 import { NavLink } from "react-router-dom";
+import ItemCard from './ItemCard'
 
 class ItemsShow extends Component {
   constructor(props){
@@ -11,6 +12,7 @@ class ItemsShow extends Component {
 
   handleOnClick = () => {
     this.props.actions.deleteItem(this.props.item.id);
+    //history.push('/items');
   };
 
 
@@ -18,9 +20,7 @@ class ItemsShow extends Component {
   return (
     <div>
       <h3>Item</h3>
-      <p>{this.props.item.name}</p>
-      <p>{this.props.item.amount}</p>
-      <p>{this.props.item.notes}</p>
+      <ItemCard item={this.props.item} />
       <p><button onClick={this.handleOnClick}>Delete</button></p>
       <p><NavLink to={`${this.props.item.id}/edit`}>Edit Item</NavLink></p>
     </div>

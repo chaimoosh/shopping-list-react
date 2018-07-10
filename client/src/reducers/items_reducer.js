@@ -4,11 +4,11 @@ export default function itemsReducer(state = {items: [],}, action) {
     case 'GET_ITEMS':
       return  {items: action.items};
     case 'CREATE_ITEM':
-      return {items: items.concat(action.item)};
+      return {items: state.items.concat(action.item)};
     case "DELETE_ITEM":
-      return {items: items.filter(item => item.id !== action.id)};
+      return {items: state.items.filter(item => item.id !== action.id)};
     case "UPDATE_ITEM":
-        return state.map(
+        return state.items.map(
           item =>
             item.id === action.item.id
               ? Object.assign({}, ...item, action.item)
