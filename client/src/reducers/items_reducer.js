@@ -1,4 +1,4 @@
-let items
+// let items
 export default function itemsReducer(state = {items: [],}, action) {
   switch (action.type) {
     case 'GET_ITEMS':
@@ -8,12 +8,12 @@ export default function itemsReducer(state = {items: [],}, action) {
     case "DELETE_ITEM":
       return {items: state.items.filter(item => item.id !== action.id)};
     case "UPDATE_ITEM":
-        return state.items.map(
+        return {items: state.items.map(
           item =>
             item.id === action.item.id
               ? Object.assign({}, ...item, action.item)
               : item
-        );
+        )}
     default:
       return state
   }

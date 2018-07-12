@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateItem } from '../actions/itemActions';
 import ItemCard from './ItemCard'
-import FormCard from './FormCard'
 
 class ItemsEdit extends Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class ItemsEdit extends Component {
     event.preventDefault();
     const { updateItem, history } = this.props
     updateItem(this.state, this.props.item.id);
-    history.push('/items');
+    history.push(`/items/${this.props.item.id}`);
   }
 
   handleOnChange = event => {

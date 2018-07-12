@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ItemsList from './components/ItemsList'
 import ItemsNew from './components/ItemsNew'
 import ItemsShow from './components/ItemsShow'
 import ItemsEdit from './components/ItemsEdit'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchItems } from './actions/itemActions'
 import Navbar from './components/Navbar'
 import * as actions from './actions/itemActions';
 class App extends Component {
 
   componentDidMount() {
-    const { items, actions } = this.props
+    const { actions } = this.props
       actions.fetchItems();
   }
 
