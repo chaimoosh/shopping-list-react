@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Navbar from './components/Navbar'
 import * as actions from './actions/itemActions';
+
 class App extends Component {
 
   componentDidMount() {

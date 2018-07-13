@@ -17,6 +17,7 @@ class ItemsNew extends Component {
     event.preventDefault();
     const { createItem, history } = this.props
     createItem(this.state);
+    console.log('D')
     history.push('/items');
   }
 
